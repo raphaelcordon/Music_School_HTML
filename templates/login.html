@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- ##### Main Area Start ##### -->
+    <main>
+        <div class="main_top">
+            <div class="mainmenu_bodytext">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul id="messages" class="list-unstyled">
+                        {% for message in messages %}
+                            <li class="alert alert-success">{{ message }}</li>
+                        {% endfor %}
+                         </ul>
+                    {% endif %}
+                {% endwith %}
+
+                <h1>Log in</h1>
+                <form method="POST" action="{{ url_for('authenticate') }}">
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <p><label>Username:</label> <input class="form-control" type="text" name="name" required>
+                    <label>Pass:</label> <input class="form-control" type="password" name="pass" required>
+                    <button type="submit">Sign in</button></p>
+                </form>
+                <br>
+
+                <p>In order to properly test, there three different accounts with different access level available:</p>
+
+                    <!-- ##### Table 'Accounts' Start ##### -->
+                    <table class="accounts">
+                        <thead>
+                            <tr>
+                                <td>Users</td>
+                                <td>Pass</td>
+                                <td>Access Level</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>admin</td>
+                                <td>admin</td>
+                                <td>Administrator</td>
+                            </tr>
+                          <tr>
+                                <td>teacher</td>
+                                <td>teacher</td>
+                                <td>tbw</td>
+                          </tr>
+                            <tr>
+                                <td>student</td>
+                                <td>student</td>
+                                <td>tbw</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                 <!-- ##### Table 'Accounts' End ##### -->
+            </div>
+        </div>
+    </main>
+        <!-- ##### Main Area End ##### -->
+
+{% endblock %}

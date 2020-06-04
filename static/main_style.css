@@ -1,0 +1,48 @@
+body {
+    background: grey;
+}
+
+.mainlogo{
+    width: 10%;
+}
+
+.under-construction {
+    width: 50%;
+}
+
+main {
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.Main_message {
+    padding: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(161, 0, 0);
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(61, 0, 0);
+    text-shadow: 0.2px 0.2px 0 rgb(83, 12, 12);
+}
+
+a:active{
+    text-decoration: none;
+    color: rgb(73, 18, 9);
+}
+
+

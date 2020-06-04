@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- ##### Main Area Start ##### -->
+        <main>
+            {% for category, message in get_flashed_messages(with_categories=True) %}
+                <div class="alert-{{category}}">{{ message }}</div>
+            {% endfor %}
+            <div class="access_level">
+                <p>Set a new name:</p>
+                <br>
+                <!-- ##### Form Edit Start ##### -->
+                <form action="{{ url_for('users_update') }}" method="post" enctype="multipart/form-data">
+                    <p></p>
+                    <fieldset>
+                        <input type="hidden" name="id" value="{{ data.id }}">
+                        <div>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" value="{{ data.username }}">
+                        </div>
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" value="{{ data.name }}">
+                        </div>
+                        <div>
+                            <label for="access_level">Access Level</label>
+                            <select id="access_level" name="access_level">
+                            {% for each in ACCESS_LEVEL %}
+                            <option value="{{each}}" {% if each == data.access_level %} selected="selected" {% endif %}>{{each}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit">Save</button>
+                            {% for category, message in get_flashed_messages(with_categories=True) %}
+                            <div class="alert-{{category}}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+                </form>
+                <!-- ##### Form Edit End ##### -->
+            </div>
+        </main>
+        <!-- ##### Main Area End ##### -->
+{% endblock %}
+

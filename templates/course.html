@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- ##### Main Area Start ##### -->
+        <main>
+            <!-- ##### Form New Register Start ##### -->
+            <div class="access_level">
+                <p>Register a new Course:</p>
+                <br>
+                <form action="{{ url_for('course_registry') }}" method="post" enctype="multipart/form-data">
+                    <fieldset>
+
+                    <div class="alert-{{category}}">
+                        <label for="name">Course Name</label>
+                        <input type="text" id="name" name="name" class="form-control">
+                        <button type="submit">Save</button>
+                        {% for category, message in get_flashed_messages(with_categories=True) %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    </fieldset>
+                </form>
+            </div>    
+            <br>
+            <div class="mainmenu_bodytext">
+                <p>Courses already registered:</p>
+
+                <table class="table-lists">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in course %}
+                        <tr>
+                            <td>{{c.name}}</td>
+                            <td>
+                            <a href="{{ url_for('course_edit', id=c.id, category='course') }}">Edit</a>
+                            <a href="{{ url_for('Delete', id=c.id, category='course') }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <!-- ##### Main Area End ##### -->
+{% endblock %}

@@ -1,0 +1,205 @@
+body {
+    background: #000000;
+}
+
+header {
+    background: rgb(212, 212, 212);
+    font-size: 20px;
+    font-weight: bolder;
+    width: 90%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(161, 0, 0);
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(61, 0, 0);
+    text-shadow: 0.2px 0.2px 0 rgb(83, 12, 12);
+}
+
+a:active{
+    text-decoration: none;
+    color: rgb(73, 18, 9);
+}
+
+.div_header {
+    position: relative;
+    margin: 0 auto;
+}
+
+.header_name {
+    text-transform: capitalize;
+    position: absolute;
+    top: 70px;
+    left: 300px;
+}
+
+.menu_options {
+    position: absolute;
+    top: 70px;
+    right: 5%;
+}
+
+.base_login {
+    text-align: right;
+    padding-top: 5%;
+    color: rgb(128, 128, 128);
+    font-size: smaller;
+}
+
+.base_login ul {
+    display: inline-flex;
+}
+
+.base_login li {
+    display: inline;
+}
+
+.base_login_name {
+    display: inline;
+    font-weight: bolder;
+}
+
+nav li {
+    display: inline;
+    margin: 0 0 0 20px;
+}
+
+main {
+    background: white;
+    font-size: 20px;
+    width: 90%;
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0;
+    padding-bottom: 2%;
+}
+.mainmenu_bodytext {
+    text-align: left;
+    margin-left: 5%;
+    padding: 10px;
+}
+
+.technical_list {
+    text-align: left;
+    margin-left: 10%;
+    font-size: 14px;
+}
+
+.technical_list_dt {
+    font-weight: bold;
+}
+
+.submenu {
+    background: rgb(219, 210, 192);
+    text-align: center;
+    font-size: 18px;
+    width: 80%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(129, 16, 16);
+}
+
+.access_level {
+    margin-top: 0;
+    padding: 10px 10% 10px 10%;
+    background: rgba(55, 168, 168, 0.8)
+}
+
+table {
+    width: 80%;
+    background: white;
+    margin-top: 1%;
+    padding: 10px 10% 10px 10%;
+    box-shadow: 3px 3px 5px rgba(29, 29, 29, 0.473)
+}
+
+.head {
+    font-weight: bold;
+}
+
+.table_body {
+    font-style: italic;
+    color: rgb(78, 78, 78);
+}
+
+td {
+    padding: 2px 5px;
+    border-bottom: 1px solid rgb(49, 49, 49);
+    vertical-align: middle;
+    font-weight: lighter;
+}
+
+thead {
+    background: rgba(170, 170, 170, 0.8);
+    border-bottom: 1px solid rgb(49, 49, 49);
+    font-weight: bolder;
+}
+
+tbody, tfoot {
+    background: rgba(190, 190, 190, 0.6);
+    font-size: 16px;
+}
+
+tfoot {
+    text-align: center;
+}
+
+.space {
+    width: 75%;
+}
+
+footer {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    text-align: center;
+    background: black;
+    color:#ffffff;
+    padding: 40px 0;
+    box-shadow: 3px 3px 5px rgba(29, 29, 9, 0.473);
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer_logo {
+    width: 15%;
+}
+
+.accounts {
+    width: unset ;
+}
+
+.table-lists {
+    max-width: 50%;
+}
+.table-lists td {
+    padding: 4px 20px 4px 5px;
+    font-size: smaller;
+}
+
+.table-lists th {
+    padding: 4px 20px 4px 5px;
+}
+
+.flash {
+    color:black;
+    background: rgb(55, 168, 168);
+    text-align: center;
+    font-size: smaller;
+}

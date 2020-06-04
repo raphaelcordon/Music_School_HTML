@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Music School App Simulator</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='musicschool_style.css') }}">
+    </head>
+    <body>
+        <!-- ##### Header Area Start ##### -->
+        <header>
+            <div class="div_header">
+                <h1><img src="{{ url_for('static', filename='imagebank/logosmall.png') }}"></h1>
+
+                <p class="header_name">School of Music</p>
+
+                <nav class="menu_options">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('course') }}">Courses</a></li>
+                        <li><a href="{{ url_for('users') }}">Users</a></li>
+                        <li><a href="{{ url_for('classes') }}">Classes</a></li>
+                    </ul>
+                    <div class="base_login">
+                        {% if session['id'] == '' %}
+                            <p>Please, log in</p>
+                        {% else %}
+                            <ul>
+                                <li><h4 class="base_login_name">{{ session['name'] }}</h4> is logged</li>
+                                <li> <form method="get" action="{{ url_for('logout') }}" enctype="multipart/form-data">
+                                    <button type="submit" id="logout">Logout</button>
+                                    </form></li>
+                            </ul>
+                        {% endif %}
+                        </div>
+                </nav>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+
+    {% block content %} {% endblock %}
+
+            <!-- ##### Footer Start ##### -->
+            <footer>
+            <a href="http://www.raphaelcordon.com/">
+                <img src="{{ url_for('static', filename='imagebank/main_logo_white.png') }}"
+                     class="footer_logo" alt="raphaecordon.com"></a>
+            <p class="copyright">&copy; Raphael Cordon - 2020</p>
+        </footer>
+        <!-- ##### Footer End ##### -->
+    </body>
+</html>

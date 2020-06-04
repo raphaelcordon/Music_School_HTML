@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- ##### Main Area Start ##### -->
+        <main>
+            <div class="mainmenu_bodytext">
+                <form method="post" action="{{ url_for('update_enrolled_courses') }}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{ data.id }}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Access Level</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{data.username}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.access_level}}</td>
+                        </tr>
+                    </tbody>
+                     <thead>
+                        <tr>
+                            <th colspan="3">Courses Engaged</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+
+
+                {% for course in course_list %}
+                    {% if course.id in enrolled %}
+                        <input type="checkbox" id="{{ course.name }}" name="{{ course.name }}" value="{{ course.id }}" checked>
+                    {% else %}
+                        <input type="checkbox" id="{{ course.name }}" name="{{ course.name }}" value="{{ course.id }}">
+                    {% endif %}
+                <label for="{{ course.name }}">{{ course.name }}</label>
+
+                {% endfor %}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <ul>
+                    <li>
+                        <a href="{{ url_for('users') }}"><button type="submit" id="return"> Return</button></a>
+                    </li>
+                    <li>
+                        <button type="submit" id="save">Save</button>
+                    </li>
+                </ul>
+                    </form>
+            </div>
+        </main>
+        <!-- ##### Main Area End ##### -->
+{% endblock %}

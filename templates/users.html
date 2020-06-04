@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- ##### Main Area Start ##### -->
+        <main>
+            <!-- ##### Form New Register Start ##### -->
+            <div class="access_level">
+                <p>Register a new User:</p>
+                <br>
+                <form action="{{ url_for('users_registry') }}" method="post" enctype="multipart/form-data">
+                    <fieldset>
+
+                    <div class="alert-{{category}}">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control">
+
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control">
+
+                        <label for="access_level">Access Level</label>
+                        <select id="access_level" name="access_level">
+                            {% for each in ACCESS_LEVEL %}
+                            <option value="{{each}}" {% if each =="Student" %} selected {% endif %}>{{each}}</option>
+                            {% endfor %}
+                            </select>
+                        <button type="submit">Save</button>
+                    </div>
+                    <div>
+                        {% for category, message in get_flashed_messages(with_categories=True) %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    </fieldset>
+                </form>
+            </div>    
+            <br>
+            <div class="mainmenu_bodytext">
+                <p>Users already registered:</p>
+
+                <!-- ##### Table Master Start ##### -->
+                <table class="table-lists">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Access Level</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        {% if user.access_level == 'Master' %}
+                        <tr>
+                            <td>{{user.username}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.access_level}}</td>
+                            <td>
+                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!-- ##### Table Master End ##### -->
+
+                <!-- ##### Table Instructor Start ##### -->
+                <table class="table-lists">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Access Level</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        {% if user.access_level == 'Instructor' %}
+                        <tr>
+                            <td>{{user.username}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.access_level}}</td>
+                            <td>
+                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!-- ##### Table Instructor End ##### -->
+
+                <!-- ##### Table Student Start ##### -->
+                <table class="table-lists">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Access Level</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        {% if user.access_level == 'Student' %}
+                        <tr>
+                            <td>{{user.username}}</td>
+                            <td><a href="{{ url_for('usercourse', id=user.id) }}">{{user.name}}</a></td>
+                            <td>{{user.access_level}}</td>
+                            <td>
+                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!-- ##### Table Student End ##### -->
+
+            </div>
+        </main>
+        <!-- ##### Main Area End ##### -->
+{% endblock %}
