@@ -1,12 +1,20 @@
-import mysql.connector
+import psycopg2
 from models import Course, Users, Enrollment
 
-
+"""
 msdb = mysql.connector.connect(
     host='localhost',
     user='music_school',
     passwd='Music_school123',
     database='music_school'
+)
+"""
+msdb = psycopg2.connect(
+    host='ec2-35-174-127-63.compute-1.amazonaws.com',
+    database='d8lfqa1i6n1qrv',
+    user='kzzrewbxspnwrp',
+    port='5432',
+    password='e94cbdbd523b32da7f854e25a9806ba4eac30968471341aef5f37da2a0858047',
 )
 
 
@@ -191,7 +199,6 @@ class DeletingDB:
                 EnrollmentDB.enroled_deleting_by_course(item)
         except:
             TryDBMessage.message()
-
 
 
 class CheckDuplication:
