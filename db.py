@@ -16,7 +16,7 @@ class CourseDB:
     @staticmethod
     def course_list():  # <- List Courses on Courses Page ->
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM course")
+        cursor.execute(f"SELECT * FROM public.course")
         course = translate_courses(cursor.fetchall())
         return course
 
@@ -24,7 +24,7 @@ class CourseDB:
     @staticmethod
     def course_find_id(category, id):  # <- ID finder to redirect to Course page ->
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM {category} where id = {id}")
+        cursor.execute(f"SELECT * FROM public.{category} where id = {id}")
         find = cursor.fetchone()
         return Course(find[0], find[1])
 
@@ -36,7 +36,7 @@ class CourseDB:
                 return True
             else:
                 cursor = msdb.cursor()
-                insert = f"INSERT INTO course (Name) VALUES (%s)"
+                insert = f"INSERT INTO public.course (Name) VALUES (%s)"
                 record = new_register
                 cursor.execute(insert, (record,))
                 msdb.commit()
@@ -50,7 +50,7 @@ class CourseDB:
                 return True
             else:
                 cursor = msdb.cursor()
-                updating_query = f"UPDATE course SET name='{new_register}' WHERE id='{id}'"
+                updating_query = f"UPDATE public.course SET name='{new_register}' WHERE id='{id}'"
                 cursor.execute(updating_query)
                 msdb.commit()
         except:
@@ -65,7 +65,7 @@ class UsersDB:
     @staticmethod
     def users_list():  # <- List Courses on Courses Page ->
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM users")
+        cursor.execute(f"SELECT * FROM public.users")
         users = translate_users(cursor.fetchall())
         return users
 
@@ -74,7 +74,7 @@ class UsersDB:
         cursor = msdb.cursor(
 
         )
-        cursor.execute(f"SELECT * FROM users where id = {id}")
+        cursor.execute(f"SELECT * FROM public.users where id = {id}")
         find = cursor.fetchone()
         return Users(find[0], find[1], find[2], find[3], find[4], find[5])
 
@@ -85,7 +85,7 @@ class UsersDB:
                 return True
             else:
                 cursor = msdb.cursor()
-                insert = f"INSERT INTO users (USERNAME,NAME, PASSWORD, COURSE, ACCESS_LEVEL) values (%s, %s, %s, %s, %s)"
+                insert = f"INSERT INTO public.users (USERNAME,NAME, PASSWORD, COURSE, ACCESS_LEVEL) values (%s, %s, %s, %s, %s)"
                 cursor.execute(insert, (username, name, password, course, access_level))
                 msdb.commit()
         except:
@@ -98,7 +98,7 @@ class UsersDB:
                 return True
             else:
                 cursor = msdb.cursor()
-                updating_query = f"UPDATE users SET USERNAME='{new_username}', NAME='{new_register}', ACCESS_LEVEL='{access_level}' WHERE id='{id}'"
+                updating_query = f"UPDATE public.users SET USERNAME='{new_username}', NAME='{new_register}', ACCESS_LEVEL='{access_level}' WHERE id='{id}'"
                 cursor.execute(updating_query)
                 msdb.commit()
         except:
@@ -108,7 +108,7 @@ class UsersDB:
     def users_password_update(id, new_password):  # <- Update User's password ->
         try:
             cursor = msdb.cursor()
-            updating_query = f"UPDATE users SET PASSWORD='{new_password}' WHERE id='{id}'"
+            updating_query = f"UPDATE public.users SET PASSWORD='{new_password}' WHERE id='{id}'"
             cursor.execute(updating_query)
             msdb.commit()
         except:
@@ -124,7 +124,7 @@ class EnrollmentDB:
     @staticmethod
     def enrollment_list():  # <- List Courses on Courses Page ->
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM enrolled_courses")
+        cursor.execute(f"SELECT * FROM public.enrolled_courses")
         users = translate_enrollment(cursor.fetchall())
         return users
 
@@ -134,7 +134,7 @@ class EnrollmentDB:
         course_id = int(course_id)
         try:
             cursor = msdb.cursor()
-            insert = f"INSERT INTO enrolled_courses (STUDENT_ID, COURSE_ID) values (%s, %s)"
+            insert = f"INSERT INTO public.enrolled_courses (STUDENT_ID, COURSE_ID) values (%s, %s)"
             cursor.execute(insert, (student_id, course_id))
             msdb.commit()
         except:
@@ -144,7 +144,7 @@ class EnrollmentDB:
     @staticmethod
     def enrolled_find_user_id(id):  # <- ID finder to redirect to Edit page ->
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM ENROLLED_COURSES where STUDENT_ID = {id}")
+        cursor.execute(f"SELECT * FROM public.ENROLLED_COURSES where STUDENT_ID = {id}")
         find = translate_enrollment(cursor.fetchall())
         if find:
             return find
@@ -155,7 +155,7 @@ class EnrollmentDB:
         student_id = int(student_id)
         try:
             cursor = msdb.cursor()
-            deleting_query = f"DELETE FROM enrolled_courses WHERE STUDENT_ID={student_id}"
+            deleting_query = f"DELETE FROM public.enrolled_courses WHERE STUDENT_ID={student_id}"
             cursor.execute(deleting_query)
             msdb.commit()
         except:
@@ -167,7 +167,7 @@ class EnrollmentDB:
         course_id = int(course_id)
         try:
             cursor = msdb.cursor()
-            deleting_query = f"DELETE FROM enrolled_courses WHERE COURSE_ID={course_id}"
+            deleting_query = f"DELETE FROM public.enrolled_courses WHERE COURSE_ID={course_id}"
             cursor.execute(deleting_query)
             msdb.commit()
         except:
@@ -182,7 +182,7 @@ class DeletingDB:
     def __init__(self, category, item):   # <- Delete an Item on DB ->
         try:
             cursor = msdb.cursor()
-            deleting_query = f"DELETE FROM {category} WHERE id='{item}'"
+            deleting_query = f"DELETE FROM public.{category} WHERE id='{item}'"
             cursor.execute(deleting_query)
             msdb.commit()
             if category == 'users':
@@ -202,11 +202,11 @@ class CheckDuplication:
             name = 'username'
 
         try:
-            consulting_query = f"SELECT {name} FROM {category} where {name} = '{item}'"
+            consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}'"
             cursor.execute(consulting_query)
             list = cursor.fetchall()
 
-            consulting_query = f"SELECT {name} FROM {category} where {name} = '{item}' and id='{id}'"
+            consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}' and id='{id}'"
             cursor.execute(consulting_query)
             list_sameID = cursor.fetchall()
 
@@ -223,7 +223,7 @@ class FindId:
         self.cursor = msdb.cursor()
         self.category = category
         self.id = id
-        self.cursor.execute(f"SELECT * FROM {self.category} where id = {self.id}")
+        self.cursor.execute(f"SELECT * FROM public.{self.category} where id = {self.id}")
         self.find = self.cursor.fetchall()
         self.return_id()
 
@@ -276,7 +276,7 @@ class Authenticate:
     def authenticate(username):
         try:
             cursor = msdb.cursor()
-            cursor.execute(f"SELECT * FROM users where username = '{username}'")
+            cursor.execute(f"SELECT * FROM public.users where username = '{username}'")
             find = cursor.fetchone()
             return Users(find[0], find[1], find[2], find[3], find[4], find[5])
         except:
