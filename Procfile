@@ -1,2 +1,1 @@
-web: gunicorn gettingstarted.wsgi
-web: gunicorn --workers=2 Music_school.py:app
+web: gunicorn --bind 0.0.0.0:$PORT Music_school.py:app
