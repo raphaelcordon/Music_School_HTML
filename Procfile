@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT Music_school.py:app
+web: gunicorn --bind 0.0.0.0:$PORT Music_school:app
