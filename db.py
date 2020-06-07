@@ -1,14 +1,6 @@
 import psycopg2
 from models import Course, Users, Enrollment
 
-"""
-msdb = mysql.connector.connect(
-    host='localhost',
-    user='music_school',
-    passwd='Music_school123',
-    database='music_school'
-)
-"""
 msdb = psycopg2.connect(
     host='ec2-35-174-127-63.compute-1.amazonaws.com',
     database='d8lfqa1i6n1qrv',
