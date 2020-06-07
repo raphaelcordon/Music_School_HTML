@@ -1,2 +1,2 @@
 web: gunicorn gettingstarted.wsgi
-web: gunicorn --workers=2 Music_School:app
+web: gunicorn --workers=2 Music_school.py:app
