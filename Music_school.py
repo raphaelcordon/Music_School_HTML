@@ -1,4 +1,5 @@
-from db import CourseDB, UsersDB, DeletingDB, FindId, Authenticate, EnrollmentDB
+import db
+from db import DeletingDB
 from flask import Flask, render_template, redirect, request, url_for, flash, session
 from models import Course, Users, Edit_Users_Access_Level, Edit_Users_Pass, Enrollment, ACCESS_LEVEL
 from passlib.hash import sha256_crypt
@@ -13,6 +14,7 @@ def index():
     logout()
     return redirect('home')
 
+
 @app.route('/home/')
 def home():
     return render_template('index.html')
@@ -25,7 +27,7 @@ def course():
         flash('You must be logged for navigation')
         return render_template('index.html')
     else:
-        course_list = CourseDB.course_list()
+        course_list = db.course_list()
         return render_template('course.html', title='Course List', course=course_list)
 
 
@@ -34,7 +36,7 @@ def course_registry():
     name = str(request.form['name']).strip().title()
     if name == '':
         flash('Blank field not accepted')
-    elif CourseDB.course_new(name):
+    elif db.course_new(name):
         flash('Already registered, please check below')
     else:
         flash('Successfully created')
@@ -43,7 +45,7 @@ def course_registry():
 
 @app.route('/CourseEdit/<category>/<int:id>')
 def course_edit(category, id):
-    data = CourseDB.course_find_id(category, id)
+    data = db.course_find_id(category, id)
     return render_template('edit_course.html', data=data, category=category)
 
 
@@ -54,7 +56,7 @@ def course_update():
     course = Course(id, name)
     if name == '':
         flash('Blank field not accepted')
-    elif CourseDB.course_update(course.id, course.name):
+    elif db.course_update(course.id, course.name):
         flash('Already registered, please check below')
     else:
         flash('Successfully updated')
@@ -71,7 +73,7 @@ def users():
         flash('You must be logged for navigation')
         return render_template('index.html')
     else:
-        users_list = UsersDB.users_list()
+        users_list = db.users_list()
         return render_template('users.html', title='Users List', users=users_list, ACCESS_LEVEL=ACCESS_LEVEL)
 
 
@@ -85,7 +87,7 @@ def users_registry():
 
     if username == '' or name == '' or access_level == '':
         flash('Blank field not accepted')
-    elif UsersDB.users_new(username, name, password, course, access_level):
+    elif db.users_new(username, name, password, course, access_level):
         flash('Already registered, please check below')
     else:
         flash("Successfully created. User the password 'pass' to login for the first time.")
@@ -94,7 +96,7 @@ def users_registry():
 
 @app.route('/UsersEdit/<category>/<int:id>')
 def users_edit(category, id):
-    data = UsersDB.users_find_id(id)
+    data = db.users_find_id(id)
     return render_template('edit_users.html', data=data, category=category, ACCESS_LEVEL=ACCESS_LEVEL)
 
 
@@ -107,7 +109,7 @@ def users_update():
     users = Edit_Users_Access_Level(id, username, name, access_level)
     if username == '' or name == '':
         flash('Blank field not accepted')
-    elif UsersDB.users_update(users.id, users.username, users.name, users.access_level):
+    elif db.users_update(users.id, users.username, users.name, users.access_level):
         flash('Already registered, please check below')
     else:
         flash('Successfully updated')
@@ -116,9 +118,9 @@ def users_update():
 
 @app.route('/usercourse/<int:id>')
 def usercourse(id):
-    course_list = CourseDB.course_list()
-    data = UsersDB.users_find_id(id)
-    enrolled = EnrollmentDB.enrolled_find_user_id(id)
+    course_list = db.course_list()
+    data = db.users_find_id(id)
+    enrolled = db.enrolled_find_user_id(id)
     enrolled_list = []
     if enrolled is not None:
         for c in enrolled:
@@ -129,11 +131,11 @@ def usercourse(id):
 
 @app.route('/update_enrolled_courses', methods=['POST',])
 def update_enrolled_courses():
-    EnrollmentDB.enroled_deleting_by_id(request.form['id'])
+    db.enroled_deleting_by_id(request.form['id'])
     for list in request.form:
         if list != 'id':
             course = request.form[list]
-            EnrollmentDB.insert_enrolled_courses(request.form['id'], course)
+            db.insert_enrolled_courses(request.form['id'], course)
 
     return redirect(url_for('users'))
 
@@ -149,6 +151,7 @@ def classes():
     else:
         return render_template('classes.html', title='Classes')
 
+
 @app.route('/Delete/<int:id>/<category>')
 def Delete(category, id):
     DeletingDB(category, id)
@@ -158,7 +161,7 @@ def Delete(category, id):
 
 @app.route('/authenticate', methods=['POST',])
 def authenticate():
-    user = Authenticate.authenticate(request.form['username'])
+    user = db.authenticate(request.form['username'])
     try:
         check_pass = sha256_crypt.verify(request.form['pass'], user.password)
     except:
@@ -201,11 +204,10 @@ def update_pass_db():
     id = session['id']
     password = sha256_crypt.encrypt(str(request.form['password']))
     new_pass = Edit_Users_Pass(id, password)
-    UsersDB.users_password_update(new_pass.id, new_pass.password)
+    db.users_password_update(new_pass.id, new_pass.password)
     print(new_pass.id, new_pass.password)
     flash('Password successfully updated')
     return redirect(url_for('home'))
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True)

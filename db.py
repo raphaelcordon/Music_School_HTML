@@ -1,6 +1,7 @@
 import psycopg2
 from models import Course, Users, Enrollment
 
+
 msdb = psycopg2.connect(
     host='ec2-35-174-127-63.compute-1.amazonaws.com',
     database='d8lfqa1i6n1qrv',
@@ -9,146 +10,111 @@ msdb = psycopg2.connect(
     password='e94cbdbd523b32da7f854e25a9806ba4eac30968471341aef5f37da2a0858047',
 )
 
-cursor = msdb.cursor()
 
 # <--- Course DEFs beginning --->
-class CourseDB:
 
-    @staticmethod
-    def course_list():  # <- List Courses on Courses Page ->
-        try:
-            cursor.execute(f"SELECT * FROM public.course")
-            course = translate_courses(cursor.fetchall())
-            return course
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
-        finally:
-            # closing database connection.
-            if (msdb):
-                cursor.close()
-                msdb.close()
-                print("PostgreSQL connection is closed")
+def course_list():  # <- List Courses on Courses Page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.course")
+    course = translate_courses(cursor.fetchall())
+    return course
 
 
-
-    @staticmethod
-    def course_find_id(category, id):  # <- ID finder to redirect to Course page ->
-        try:
-            cursor.execute(f"SELECT * FROM public.{category} where id = {id}")
-            find = cursor.fetchone()
-            return Course(find[0], find[1])
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
-        finally:
-            # closing database connection.
-            if (msdb):
-                cursor.close()
-                msdb.close()
-                print("PostgreSQL connection is closed")
+def course_find_id(category, id):  # <- ID finder to redirect to Course page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.{category} where id = {id}")
+    find = cursor.fetchone()
+    return Course(find[0], find[1])
 
 
-    @staticmethod
-    def course_new(new_register):  # <- Register a new Course in the table ->
-        try:
-            if CheckDuplication.check('course', new_register, id=None) is True:
-                return True
-            else:
-                cursor.execute(f"INSERT INTO public.course (Name) VALUES ({new_register})")
-                msdb.commit()
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
-        finally:
-            # closing database connection.
-            if (msdb):
-                cursor.close()
-                msdb.close()
-                print("PostgreSQL connection is closed")
+def course_new(new_register):  # <- Register a new Course in the table ->
+    try:
+        if check_duplication('course', new_register, id=None) is True:
+            return True
+        else:
+            cursor = msdb.cursor()
+            cursor.execute("ROLLBACK")
+            insert = f"INSERT INTO public.course (Name) VALUES (%s)"
+            record = new_register
+            cursor.execute(insert, (record,))
+            msdb.commit()
+    except:
+        TryDBMessage.message()
 
 
-    @staticmethod
-    def course_update(id, new_register):  # <- Update an existent Course ->
-        try:
-            if CheckDuplication.check('course', new_register, id) is True:
-                return True
-            else:
-                updating_query = f"UPDATE public.course SET name='{new_register}' WHERE id={id}"
-                cursor.execute(updating_query)
-                msdb.commit()
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
-        finally:
-            # closing database connection.
-            if (msdb):
-                cursor.close()
-                msdb.close()
-                print("PostgreSQL connection is closed")
+def course_update(id, new_register):  # <- Update an existent Course ->
+    try:
+        if check_duplication('course', new_register, id) is True:
+            return True
+        else:
+            cursor = msdb.cursor()
+            cursor.execute("ROLLBACK")
+            updating_query = f"UPDATE public.course SET name='{new_register}' WHERE id='{id}'"
+            cursor.execute(updating_query)
+            msdb.commit()
+    except:
+        TryDBMessage.message()
 
 # <--- Course DEFs ending --->
 
 
 # <--- Users DEFs beginning --->
-class UsersDB:
 
-    @staticmethod
-    def users_list():  # <- List Courses on Courses Page ->
-        try:
+def users_list():  # <- List Courses on Courses Page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.users")
+    users = translate_users(cursor.fetchall())
+    return users
+
+
+def users_find_id(id):  # <- ID finder to redirect to Edit page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.users where id = {id}")
+    find = cursor.fetchone()
+    return Users(find[0], find[1], find[2], find[3], find[4], find[5])
+
+
+def users_new(username, name, password, course, access_level):  # <- Register a new User in the table ->
+    try:
+        if check_duplication('users', username, id=None) is True:
+            return True
+        else:
             cursor = msdb.cursor()
-            cursor.execute(f"SELECT * FROM public.users")
-            users = translate_users(cursor.fetchall())
-            cursor.close()
-            return users
-        except:
-            TryDBMessage.message()
+            cursor.execute("ROLLBACK")
+            insert = f"INSERT INTO public.users (USERNAME,NAME, PASSWORD, COURSE, ACCESS_LEVEL) values (%s, %s, %s, %s, %s)"
+            cursor.execute(insert, (username, name, password, course, access_level))
+            msdb.commit()
+    except:
+        TryDBMessage.message()
 
-    @staticmethod
-    def users_find_id(id):  # <- ID finder to redirect to Edit page ->
-        try:
+
+def users_update(id, new_username, new_register, access_level):  # <- Update an existent User ->
+    try:
+        if check_duplication('users', new_register, id) is True:
+            return True
+        else:
             cursor = msdb.cursor()
-            cursor.execute(f"SELECT * FROM public.users where id = {id}")
-            find = cursor.fetchone()
-            cursor.close()
-            return Users(find[0], find[1], find[2], find[3], find[4], find[5])
-        except:
-            TryDBMessage.message()
-
-    @staticmethod
-    def users_new(username, name, password, course, access_level):  # <- Register a new User in the table ->
-        try:
-            if CheckDuplication.check('users', username, id=None) is True:
-                return True
-            else:
-                cursor = msdb.cursor()
-                insert = f"INSERT INTO public.users (USERNAME,NAME, PASSWORD, COURSE, ACCESS_LEVEL) values (%s, %s, %s, %s, %s)"
-                cursor.execute(insert, (username, name, password, course, access_level))
-                msdb.commit()
-                cursor.close()
-        except:
-            TryDBMessage.message()
-
-    @staticmethod
-    def users_update(id, new_username, new_register, access_level):  # <- Update an existent User ->
-        try:
-            if CheckDuplication.check('users', new_register, id) is True:
-                return True
-            else:
-                cursor = msdb.cursor()
-                updating_query = f"UPDATE public.users SET USERNAME='{new_username}', NAME='{new_register}', ACCESS_LEVEL='{access_level}' WHERE id='{id}'"
-                cursor.execute(updating_query)
-                msdb.commit()
-                cursor.close()
-        except:
-            TryDBMessage.message()
-
-    @staticmethod
-    def users_password_update(id, new_password):  # <- Update User's password ->
-        try:
-            cursor = msdb.cursor()
-            updating_query = f"UPDATE public.users SET PASSWORD='{new_password}' WHERE id='{id}'"
+            cursor.execute("ROLLBACK")
+            updating_query = f"UPDATE public.users SET USERNAME='{new_username}', NAME='{new_register}', ACCESS_LEVEL='{access_level}' WHERE id='{id}'"
             cursor.execute(updating_query)
             msdb.commit()
-            cursor.close()
-        except:
-            TryDBMessage.message()
+    except:
+        TryDBMessage.message()
+
+
+def users_password_update(id, new_password):  # <- Update User's password ->
+    try:
+        cursor = msdb.cursor()
+        cursor.execute("ROLLBACK")
+        updating_query = f"UPDATE public.users SET PASSWORD='{new_password}' WHERE id='{id}'"
+        cursor.execute(updating_query)
+        msdb.commit()
+    except:
+        TryDBMessage.message()
 
 
 # <--- Users DEFs ending --->
@@ -156,59 +122,58 @@ class UsersDB:
 
 # <--- Enrollment DEFs beginning --->
 
-class EnrollmentDB:
-    @staticmethod
-    def enrollment_list():  # <- List Courses on Courses Page ->
+def enrollment_list():  # <- List Courses on Courses Page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.enrolled_courses")
+    users = translate_enrollment(cursor.fetchall())
+    return users
+
+
+def insert_enrolled_courses(student_id, course_id):  # <- Insert Enrolled's Table ->
+    student_id = int(student_id)
+    course_id = int(course_id)
+    try:
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM public.enrolled_courses")
-        users = translate_enrollment(cursor.fetchall())
-        return users
-
-    @staticmethod
-    def insert_enrolled_courses(student_id, course_id):  # <- Insert Enrolled's Table ->
-        student_id = int(student_id)
-        course_id = int(course_id)
-        try:
-            cursor = msdb.cursor()
-            insert = f"INSERT INTO public.enrolled_courses (STUDENT_ID, COURSE_ID) values (%s, %s)"
-            cursor.execute(insert, (student_id, course_id))
-            msdb.commit()
-        except:
-            TryDBMessage.message()
+        cursor.execute("ROLLBACK")
+        insert = f"INSERT INTO public.enrolled_courses (STUDENT_ID, COURSE_ID) values (%s, %s)"
+        cursor.execute(insert, (student_id, course_id))
+        msdb.commit()
+    except:
+        TryDBMessage.message()
 
 
-    @staticmethod
-    def enrolled_find_user_id(id):  # <- ID finder to redirect to Edit page ->
+def enrolled_find_user_id(id):  # <- ID finder to redirect to Edit page ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    cursor.execute(f"SELECT * FROM public.ENROLLED_COURSES where STUDENT_ID = {id}")
+    find = translate_enrollment(cursor.fetchall())
+    if find:
+        return find
+
+
+def enroled_deleting_by_id(student_id):  # <- ID finder to redirect to Edit page ->
+    student_id = int(student_id)
+    try:
         cursor = msdb.cursor()
-        cursor.execute(f"SELECT * FROM public.ENROLLED_COURSES where STUDENT_ID = {id}")
-        find = translate_enrollment(cursor.fetchall())
-        cursor.close()
-        if find:
-            return find
+        cursor.execute("ROLLBACK")
+        deleting_query = f"DELETE FROM public.enrolled_courses WHERE STUDENT_ID={student_id}"
+        cursor.execute(deleting_query)
+        msdb.commit()
+    except:
+        TryDBMessage.message()
 
 
-    @staticmethod
-    def enroled_deleting_by_id(student_id):  # <- ID finder to redirect to Edit page ->
-        student_id = int(student_id)
-        try:
-            cursor = msdb.cursor()
-            deleting_query = f"DELETE FROM public.enrolled_courses WHERE STUDENT_ID={student_id}"
-            cursor.execute(deleting_query)
-            msdb.commit()
-        except:
-            TryDBMessage.message()
-
-
-    @staticmethod
-    def enroled_deleting_by_course(course_id):  # <- ID finder to redirect to Edit page ->
-        course_id = int(course_id)
-        try:
-            cursor = msdb.cursor()
-            deleting_query = f"DELETE FROM public.enrolled_courses WHERE COURSE_ID={course_id}"
-            cursor.execute(deleting_query)
-            msdb.commit()
-        except:
-            TryDBMessage.message()
+def enroled_deleting_by_course(course_id):  # <- ID finder to redirect to Edit page ->
+    course_id = int(course_id)
+    try:
+        cursor = msdb.cursor()
+        cursor.execute("ROLLBACK")
+        deleting_query = f"DELETE FROM public.enrolled_courses WHERE COURSE_ID={course_id}"
+        cursor.execute(deleting_query)
+        msdb.commit()
+    except:
+        TryDBMessage.message()
 
 
 # <--- Enrollment DEFs ending --->
@@ -219,47 +184,47 @@ class DeletingDB:
     def __init__(self, category, item):   # <- Delete an Item on DB ->
         try:
             cursor = msdb.cursor()
+            cursor.execute("ROLLBACK")
             deleting_query = f"DELETE FROM public.{category} WHERE id='{item}'"
             cursor.execute(deleting_query)
             msdb.commit()
-            cursor.close()
             if category == 'users':
-                EnrollmentDB.enroled_deleting_by_id(item)
+                enroled_deleting_by_id(item)
             elif category == 'course':
-                EnrollmentDB.enroled_deleting_by_course(item)
+                enroled_deleting_by_course(item)
         except:
             TryDBMessage.message()
 
 
-class CheckDuplication:
-    @staticmethod
-    def check(category, item, id):   # <- Return the info if an Item exists into the table ->
-        global cursor
-        cursor = msdb.cursor()
-        name = 'name'
-        if category == 'username':
-            name = 'username'
+def check_duplication(category, item, id):   # <- Return the info if an Item exists into the table ->
+    cursor = msdb.cursor()
+    cursor.execute("ROLLBACK")
+    name = 'name'
+    if category == 'username':
+        name = 'username'
 
-        try:
-            consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}'"
-            cursor.execute(consulting_query)
-            list = cursor.fetchall()
+    try:
+        cursor.execute("ROLLBACK")
+        consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}'"
+        cursor.execute(consulting_query)
+        list = cursor.fetchall()
 
-            consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}' and id='{id}'"
-            cursor.execute(consulting_query)
-            list_sameID = cursor.fetchall()
+        consulting_query = f"SELECT {name} FROM public.{category} where {name} = '{item}' and id='{id}'"
+        cursor.execute(consulting_query)
+        list_sameID = cursor.fetchall()
 
-            if list_sameID:
-                pass
-            elif list:
-                return True
-        except:
-            TryDBMessage.message()
+        if list_sameID:
+            pass
+        elif list:
+            return True
+    except:
+        TryDBMessage.message()
 
 
 class FindId:
     def __init__(self, category, id):  # <- ID finder to redirect to Edit page ->
         self.cursor = msdb.cursor()
+        self.cursor.execute("ROLLBACK")
         self.category = category
         self.id = id
         self.cursor.execute(f"SELECT * FROM public.{self.category} where id = {self.id}")
@@ -307,19 +272,15 @@ def translate_enrollment(users):  # <- Converts DB data (enrollment) into Tuple 
 
 # <--- Authentication DEFs beginning --->
 
-class Authenticate:
-    def __init__(self):
-        self.cursor = msdb.cursor()
-
-    @staticmethod
-    def authenticate(username):
+def authenticate(username):
+    try:
         cursor = msdb.cursor()
+        cursor.execute("ROLLBACK")
         cursor.execute(f"SELECT * FROM public.users where username = '{username}'")
         find = cursor.fetchone()
         return Users(find[0], find[1], find[2], find[3], find[4], find[5])
+    except:
+        TryDBMessage.message()
 
 
 # <--- Authentication DEFs Ending --->
-
-
-
