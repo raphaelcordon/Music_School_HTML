@@ -11,6 +11,22 @@ msdb = psycopg2.connect(
 )
 
 
+# <--- Authentication DEFs beginning --->
+
+def authenticate(username):
+    try:
+        cursor = msdb.cursor()
+        cursor.execute("ROLLBACK")
+        cursor.execute(f"SELECT * FROM public.users where username = '{username}'")
+        find = cursor.fetchone()
+        return Users(find[0], find[1], find[2], find[3], find[4], find[5])
+    except:
+        TryDBMessage.message()
+
+
+# <--- Authentication DEFs Ending --->
+
+
 # <--- Course DEFs beginning --->
 
 def course_list():  # <- List Courses on Courses Page ->
@@ -72,21 +88,19 @@ def users_list():  # <- List Courses on Courses Page ->
 
 def users_find_id(id):  # <- ID finder to redirect to Edit page ->
     cursor = msdb.cursor()
-    cursor.execute("ROLLBACK")
     cursor.execute(f"SELECT * FROM public.users where id = {id}")
     find = cursor.fetchone()
     return Users(find[0], find[1], find[2], find[3], find[4], find[5])
 
 
-def users_new(username, name, password, course, access_level):  # <- Register a new User in the table ->
+def users_new(username, name, access_level):  # <- Register a new User in the table ->
     try:
         if check_duplication('users', username, id=None) is True:
             return True
         else:
             cursor = msdb.cursor()
-            cursor.execute("ROLLBACK")
-            insert = f"INSERT INTO public.users (USERNAME,NAME, PASSWORD, COURSE, ACCESS_LEVEL) values (%s, %s, %s, %s, %s)"
-            cursor.execute(insert, (username, name, password, course, access_level))
+            cursor.execute(f"INSERT INTO public.users (USERNAME, NAME, PASSWORD, COURSE, ACCESS_LEVEL) "
+                           f"values ('{username}', '{name}','pass', 'false', '{access_level}')")
             msdb.commit()
     except:
         TryDBMessage.message()
@@ -98,7 +112,6 @@ def users_update(id, new_username, new_register, access_level):  # <- Update an 
             return True
         else:
             cursor = msdb.cursor()
-            cursor.execute("ROLLBACK")
             updating_query = f"UPDATE public.users SET USERNAME='{new_username}', NAME='{new_register}', ACCESS_LEVEL='{access_level}' WHERE id='{id}'"
             cursor.execute(updating_query)
             msdb.commit()
@@ -109,7 +122,6 @@ def users_update(id, new_username, new_register, access_level):  # <- Update an 
 def users_password_update(id, new_password):  # <- Update User's password ->
     try:
         cursor = msdb.cursor()
-        cursor.execute("ROLLBACK")
         updating_query = f"UPDATE public.users SET PASSWORD='{new_password}' WHERE id='{id}'"
         cursor.execute(updating_query)
         msdb.commit()
@@ -268,19 +280,3 @@ def translate_enrollment(users):  # <- Converts DB data (enrollment) into Tuple 
 
 
 #       <--- Supporting DEFs ending --->
-
-
-# <--- Authentication DEFs beginning --->
-
-def authenticate(username):
-    try:
-        cursor = msdb.cursor()
-        cursor.execute("ROLLBACK")
-        cursor.execute(f"SELECT * FROM public.users where username = '{username}'")
-        find = cursor.fetchone()
-        return Users(find[0], find[1], find[2], find[3], find[4], find[5])
-    except:
-        TryDBMessage.message()
-
-
-# <--- Authentication DEFs Ending --->

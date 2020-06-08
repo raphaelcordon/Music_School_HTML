@@ -81,13 +81,11 @@ def users():
 def users_registry():
     username = str(request.form['username']).strip().lower()
     name = str(request.form['name']).strip().title()
-    password = 'pass'  # First login will force to change
-    course = 0
     access_level = request.form['access_level']
 
     if username == '' or name == '' or access_level == '':
         flash('Blank field not accepted')
-    elif db.users_new(username, name, password, course, access_level):
+    elif db.users_new(username, name, access_level):
         flash('Already registered, please check below')
     else:
         flash("Successfully created. User the password 'pass' to login for the first time.")
