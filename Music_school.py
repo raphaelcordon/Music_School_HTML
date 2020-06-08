@@ -210,4 +210,4 @@ def update_pass_db():
     return redirect(url_for('home'))
 
 
-app.run(debug=True)
+app.run()
