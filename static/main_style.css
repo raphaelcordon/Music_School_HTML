@@ -1,37 +1,103 @@
+/* CSS Main page */
+
 body {
-    background: grey;
+    background: rgb(192, 192, 192);
+    margin-top: 0;
+}
+
+h1 {
+    display: inline;
 }
 
 .mainlogo{
     width: 10%;
+    padding-left: 5%;
 }
 
-.under-construction {
-    width: 50%;
+.header_link {
+    vertical-align: 20px;
+    padding-left: 20px;
+    font-size: 25px;
+    color: rgb(34, 34, 34);
 }
 
 main {
-    background: #000000;
-    color: #ffffff;
-    text-align: center;
-    font-size: 25px;
-    font-weight: bolder;
-    width: 100%;
-    margin-top: 0;
-    margin-bottom: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    background: #ffffff;
+    color: rgb(40, 40, 40);
+    text-align: left;
+    width: 95%;
+    margin: 0 auto 0 auto;
+    padding: 1% 0 1%;
+    box-shadow: 3px 3px 5px rgba(29, 29, 29, 0.473)
 }
 
 .Main_message {
-    padding: 20px;
+    padding: 3%;
+    font-style: bold;
+    font-family: 'Roboto', sans-serif;
 }
 
-a{
+.introduction {
+    padding-top: 14%;
+    margin: 0 3% 0 5%;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+h4 {
+    padding: 0 4%;
+    width: 300px;
+    float: left;
+
+}
+
+.courses_list {
+    float: none;
+    margin-left: 10%;
+    font-size: 18px;
+    line-height: 1.2;
+    font-style: italic;
+}
+
+.social_media {
+    margin-left: 10%;
+    font-size: 20px;
+}
+
+.social_media_image {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+}
+
+.social_media_link {
+    padding-left: 15%;
+    vertical-align: middle;
+}
+
+.table_app {
+    width: 95%;
+}
+
+.table_app_td {
+    width: 75%;
+    padding: 2%;
+}
+
+.apps_image {
+    text-align: center;
+    box-shadow: 2px 2px 2px #555555;
+}
+
+.apps_title {
+    vertical-align: center;
+    text-align: left;
+}
+
+a {
     text-decoration: none;
-    color: rgb(161, 0, 0);
+    color: rgb(214, 182, 0);
+    text-shadow: 0.2px 0.2px 0 black;
 }
 
 a:hover {
@@ -43,6 +109,64 @@ a:hover {
 a:active{
     text-decoration: none;
     color: rgb(73, 18, 9);
+}
+
+
+footer {
+    width: 95.2%;
+    margin: 0 auto 0 auto;
+    margin-bottom: 5%;
+    text-align: center;
+    background: black;
+    color:#ffffff;
+    padding: 5% 0;
+    box-shadow: 3px 3px 5px rgba(29, 29, 9, 0.473);
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer_logo {
+    width: 15%;
+}
+
+/* CSS for Smartphones */
+
+@media screen and (max-width: 480px) {
+    .mainlogo {
+        width: 30%;
+    }
+
+    .mainlogo, .header_link{
+        padding-left: unset;
+        padding: 0 0 0 0;
+        margin: 0 auto 0 auto;
+    }
+
+    .header_link {
+        padding-left: 5%;
+    }
+    
+    main {
+        width: 100%;
+        padding-bottom: 5%;
+    }
+
+    .introduction {
+        padding-top: unset;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    h4 {
+        padding: 0 4%;
+        width: 300px;
+        float: unset;
+
+    }
+
+    footer {
+        width: 100%;
+        margin-bottom: 1%;
+    }
 }
 
 

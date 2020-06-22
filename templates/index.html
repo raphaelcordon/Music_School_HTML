@@ -1,171 +1,153 @@
-{% extends 'base.html' %}
-{% block content %}
-        <!-- ##### Main Area Start ##### -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>..:: Raphael Cordon ::..</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- ##### Header Start ##### -->
+        <header>
+            <h1>
+                <a href="http://www.raphaelcordon.com/"><img src="{{ url_for('static', filename='index/main_logo.png') }}" class="mainlogo"></a>
+                <a href="http://www.raphaelcordon.com/" class="header_link">raphaelcordon.com</a>
+            </h1>
+        </header>
+        <!-- ##### Header End ##### -->
+
         <main>
-            {% for category, message in get_flashed_messages(with_categories=True) %}
-            <div class="flash">{{ message }}</div> {% endfor %}
+            <!-- ##### Introduction Start ##### -->
+            <h2 class="Main_message">I am Raphael Cordon,</h2>
+            <h4><image src="{{ url_for('static', filename='index/eu.png') }}"></image></h4>
+            <section class='introduction'>
+                <p>I am an IT professional for more than 11 years with a strong focus on Project Management.<br>
+                    My professional background is available on LinkedIn, please find the links below for my social media.</p>
+                
+                <p>This is my portfolio for Software Development projects.<br>
 
-                {% if session['username'] == '' %}
-                <div class="access_level">
-                <p>Log in:</p>
-                <br>
-                <form action="{{ url_for('authenticate') }}" method="post" enctype="multipart/form-data">
-                <fieldset>
-                    <div>
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
+                    Some of the projects can be found on my Github, link below.<br><br>
+                    
+                    I am a Python student, also learning related subjects to achieve my goals, such as:</p>
+            </section>
+            <!-- ##### Introduction End ##### -->
 
-                        <label for="pass">pass</label>
-                        <input type="password" id="pass" name="pass" required>
+            <!-- ##### Course List Start ##### -->
+            <section class="courses_list">
+                <ul>
+                    <li>
+                        HTML5 / CSS3
+                    </li>
+                    <li>
+                        MySQL / Postgre
+                    </li>
+                    <li>
+                        Python libraries such as:
+                        <ul>
+                            <li>
+                                &nbsp;&nbsp;- Flask
+                            </li>
+                            <li>
+                                &nbsp;&nbsp;- Django
+                            </li>
+                            <li>
+                                &nbsp;&nbsp;- Pandas
+                            </li>
+                            <li>
+                                &nbsp;&nbsp;- Numpy
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <!-- ##### Course List End ##### -->
 
-                        <button type="submit">Log in</button>
-                    </div>
-                </fieldset>
-                </form>
-            </div>
-        {% endif %}
-
-            <div class="mainmenu_bodytext">
-
-                <p><font color = red>The website isn't yet restricted by access level though the schema is already created.
-                    It will be available soon! :)</font></p>
-                <p>In order to properly test, there three different accounts with different access levels available:</p>
-
-                <!-- ##### Table 'Accounts' Start ##### -->
-                <table class="accounts">
-                    <thead>
-                        <tr>
-                            <td>Users</td>
-                            <td>Pass</td>
-                            <td>Access Level</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>admin</td>
-                            <td>admin</td>
-                            <td>Administrator</td>
-                        </tr>
-                      <tr>
-                            <td>teacher</td>
-                            <td>teacher</td>
-                            <td>tbw</td>
-                      </tr>
-                        <tr>
-                            <td>student</td>
-                            <td>student</td>
-                            <td>tbw</td>
-                      </tr>
-                    </tbody>
-                </table>
-                 <!-- ##### Table 'Accounts' End ##### -->
-
-                <br>
-                <p>This app is part of my collection for Python studies.</p>
-
-                <p>The complete solution includes:</p>
-                <br>
-                <dl class="technical_list">
-                    <dt class="technical_list_dt">HTML5 / CSS</dt>
-                    <dd>&nbsp;&nbsp;- Visual Studio Code</dd>
-                    <dt class="technical_list_dt">Python3</dt>
-                    <dd>&nbsp;&nbsp;- PyCharm / Flask</dd>
-                    <dt class="technical_list_dt">SQL</dt>
-                    <dd>&nbsp;&nbsp;- MySQL</dd>
-                </dl>
-            </div>
-            <div class="mainmenu_bodytext">
-                <p>MySQL Database Structure:</p>
-
-                <!-- ##### Table 'USERS' Start ##### -->
+            <!-- ##### Social Media Start ##### -->
+            <h3 class="Main_message">My Social Media</h3>
+            <section class="social_media">
                 <table>
-                    <thead>
-                        <tr>
-                            <td colspan="5">Users</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="head">
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Course</td>
-                            <td>Acces_level</td>
-                            <td>Allowed to</td>
-                        </tr>
-                        <tr class="table_body">
-                            <td>Auto_inc</td>
-                            <td>Varchar</td>
-                            <td>Bool</td>
-                            <td>admin</td>
-                            <td>add, update, delete 'Courses' and 'Users'</td>
-                        </tr>
-                        <tr class="table_body">
-                            <td>Auto_inc</td>
-                            <td>Smallint</td>
-                            <td>Bool</td>
-                            <td>Instructor</td>
-                            <td>add, update, delete 'Classes' and link 'Users'</td>
-                        </tr> 
-                        <tr class="table_body">
-                            <td>Auto_inc</td>
-                            <td>Varchar</td>
-                            <td>Bool</td>
-                            <td>Student</td>
-                            <td>read 'Classes'</td>
-                        </tr>  
-                    </tbody>
+                    <tr>
+                        <td><image src="{{ url_for('static', filename='index/socialmedia/github-logo-transparent-black.png') }}" class="social_media_image" id="Github"></td>
+                        <td class="social_media_link"><a href="https://github.com/raphaelcordon" id="Github" target="_blank">Github</a></td>
+                    </tr>
+                    <tr>
+                        <td><image src="{{ url_for('static', filename='index/socialmedia/linkedin-logo-transparent-black.png') }}" class="social_media_image" id="LinkedIn"></td>
+                        <td class="social_media_link"><a href="https://www.linkedin.com/in/raphael-cordon-04440820/" id="LinkedIn" target="_blank">LinkedIn</a></td>
+                    </tr>
+                    <tr>
+                        <td><image src="{{ url_for('static', filename='index/socialmedia/wordpress-logo-transparent-black.png') }}" class="social_media_image" id="Wordpress"></td>
+                        <td class="social_media_link"><a href="https://raphaelcordon.wordpress.com/" id="Wordpress" target="_blank">Wordpress</a></td>
+                    </tr>
+                    <tr>
+                        <td><image src="{{ url_for('static', filename='index/socialmedia/facebook-logo-transparent-black.png') }}" class="social_media_image" id="Facebook"></td>
+                        <td class="social_media_link"><a href="https://www.facebook.com/raphael.cordon" id="Facebook" target="_blank">Facebook</a></td>
+                    </tr>
                 </table>
-                <!-- ##### Table 'USERS' End ##### -->
 
-                <!-- ##### Table 'COURSES' Start ##### -->
-                <table class="main_page">
-                    <thead>
-                        <tr>
-                            <td colspan="5">Courses</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="head">
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td class="space"></td>
-                        </tr>
-                        <tbody>
-                            <tr class="table_body">
-                                <td>Auto_inc</td>
-                                <td>Varchar</td>
-                                <td class="space"></td>
-                            </tr>
-                    </tbody>  
-                </table>
-                <!-- ##### Table 'COURSES' End ##### -->
+            </section>
+            <!-- ##### Social Media End ##### -->
 
-                <!-- ##### Table 'CLASSES' Start ##### -->
-                <table class="main_page">
-                    <thead>
-                        <tr>
-                            <td colspan="5">Classes</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="head">
-                            <td>ID</td>
-                            <td>Course_id</td>
-                            <td>Instructor_id</td>
-                            <td>Student_id</td>
-                            <td>Calendar</td>
-                        </tr>
-                        <tr class="table_body">
-                            <td>Auto_inc</td>
-                            <td>Smallint</td>
-                            <td>Smallint</td>
-                            <td>Smallint</td>
-                            <td>Date</td>
-                        </tr>
-                    </tbody> 
+            <!-- ##### Apps Start ##### -->
+            <h3 class="Main_message">Apps (Flask based)</h3>
+            <section class="social_media">
+                <h5>Hosted by herokuapp</h5>
+                <table class="table_app">
+                    <tr>
+                        <td class="table_app_td">
+                            <image src="{{ url_for('static', filename='index/apps/app_musicschool.png') }}" class="apps_image" id="app_musicschool"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="apps_title"><a href="https://raphaelcordon.herokuapp.com/music_school/" id="app_musicschool" target="_blank">School of Music | Management App Simulator</a><br>&nbsp;</td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The app intends to simulate basic functions for the daily-basis routine of a music school.
+                            Three layers of accesses are set where:<br>
+                            &nbsp;&nbsp;- '<b>Admin</b>':&nbsp; Has full access to create, update and remove courses, instructors and students.<br>
+                            &nbsp;&nbsp;- '<b>Instructors</b>':&nbsp; Can create classes, add and remove students from classes.<br>
+                            &nbsp;&nbsp;- '<b>Students</b>':&nbsp; Can see the classes from courses they are subscribed in.<br>
+
+                            <br><font color=darkred >This app is still under construction, but it is already possible to pass some screens and different functionalities such as create, edit and delete courses and users, though any user will have for now the same level of access in the system.</font>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="table_app_td">
+                            <image src="{{ url_for('static', filename='index/apps/app_movieapi.png') }}" class="apps_image" id="app_movieapi"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://raphaelcordonmovieapi.herokuapp.com/" id="app_movieapi" target="_blank">Movie API</a><br>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The app connects to OMDb API in order to obtain a list of:<br>
+                            &nbsp;&nbsp;- <b>Movies</b><br>
+                            &nbsp;&nbsp;- <b>Series</b><br>
+                            &nbsp;&nbsp;- <b>Games</b><br>
+                            &nbsp;&nbsp;- <b>Live Concerts</b><br>
+                            <br>
+                            OMDb API offers two types of search:<br>
+                            &nbsp;&nbsp;- <b>Multiple results: </b>I used this one to list all the results related to the name typed.<br>
+                            &nbsp;&nbsp;- <b>Specific data: </b>Once clicked on "<i>More Details</i>" from a movie, the detailed search according to the IMDB ID will be shown.<br>
+                        </td>
+                    </tr>
                 </table>
-                <!-- ##### Table 'CLASSES' End ##### -->
-            </div>
+
+            </section>
+            <!-- ##### Apps End ##### -->
         </main>
-        <!-- ##### Main Area End ##### -->
-{% endblock %}
+
+        <!-- ##### Footer Start ##### -->
+        <footer>
+            <a href="http://www.raphaelcordon.com/">
+                <img src="{{ url_for('static', filename='index/main_logo_white.png') }}"class="footer_logo"></a>
+            <p class="copyright">&copy; Raphael Cordon - 2020</p>
+        </footer>
+        <!-- ##### Footer End ##### -->
+    </body>
+</html> 

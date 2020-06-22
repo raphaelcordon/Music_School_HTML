@@ -11,13 +11,18 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+
+@app.route('/music_school')
+def music_school():
     logout()
     return redirect('home')
 
 
 @app.route('/home/')
 def home():
-    return render_template('index.html')
+    return render_template('music_school.html')
 
 
 # <--- Course routes beginning --->
@@ -25,7 +30,7 @@ def home():
 def course():
     if session['username'] == '' or 'username' not in session:
         flash('You must be logged for navigation')
-        return render_template('index.html')
+        return render_template('music_school.html')
     else:
         course_list = db.course_list()
         return render_template('course.html', title='Course List', course=course_list)
@@ -71,7 +76,7 @@ def course_update():
 def users():
     if session['username'] == '' or 'username' not in session:
         flash('You must be logged for navigation')
-        return render_template('index.html')
+        return render_template('music_school.html')
     else:
         users_list = db.users_list()
         return render_template('users.html', title='Users List', users=users_list, ACCESS_LEVEL=ACCESS_LEVEL)
@@ -209,4 +214,4 @@ def update_pass_db():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
