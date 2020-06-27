@@ -20,6 +20,7 @@ def music_school():
     return redirect('home')
 
 
+
 @app.route('/home/')
 def home():
     return render_template('music_school.html')

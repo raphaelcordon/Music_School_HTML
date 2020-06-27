@@ -93,7 +93,29 @@
             <h3 class="Main_message">Apps (Flask based)</h3>
             <section class="social_media">
                 <h5>Hosted by herokuapp</h5>
+
+                <!-- ## Resenhando ## -->
                 <table class="table_app">
+                    <tr>
+                        <td class="table_app_td">
+                            <image src="{{ url_for('static', filename='index/apps/app_resenhando.png') }}" class="apps_image" id="app_musicschool"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="apps_title"><a href="https://resenhando.herokuapp.com" id="app_resenhando" target="_blank">Resenhando (Portuguese only)</a><br>&nbsp;</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The app is a mini 'social-media' where the users can review a music, album or music artist.
+                            I chose to write the front-end in Portuguese in order to monitor the database with some volume of data, and since most of my friends are Brazilian, it made more sense to user Portuguese instead of English.
+
+                            <br><font color=darkred ><br>Though is still under construction, the website is usable, for now I just restricted the option of creating an account by itself, just people I gave access can create new reviews.</font>
+                            <br><p><br><font color=darkred >But I must say, the app is beautiful! :).</font></p>
+                        </td>
+                    </tr>
+
+                    <!-- ## Music School ## -->
                     <tr>
                         <td class="table_app_td">
                             <image src="{{ url_for('static', filename='index/apps/app_musicschool.png') }}" class="apps_image" id="app_musicschool"></td>
@@ -115,6 +137,7 @@
                         </td>
                     </tr>
 
+                    <!-- ## Movie API ## -->
                     <tr>
                         <td class="table_app_td">
                             <image src="{{ url_for('static', filename='index/apps/app_movieapi.png') }}" class="apps_image" id="app_movieapi"></td>
@@ -137,7 +160,6 @@
                         </td>
                     </tr>
                 </table>
-
             </section>
             <!-- ##### Apps End ##### -->
         </main>
