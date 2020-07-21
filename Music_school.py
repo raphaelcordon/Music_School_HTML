@@ -1,7 +1,7 @@
 import db
 from db import DeletingDB
 from flask import Flask, render_template, redirect, request, url_for, flash, session
-from models import Course, Users, Edit_Users_Access_Level, Edit_Users_Pass, Enrollment, ACCESS_LEVEL
+from models import Course, Edit_Users_Access_Level, Edit_Users_Pass, ACCESS_LEVEL
 from passlib.hash import sha256_crypt
 
 
