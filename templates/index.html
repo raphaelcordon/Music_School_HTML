@@ -1,166 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Raphael Cordon personal website">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>..:: Raphael Cordon ::..</title>
+        <link rel="shortcut icon" href="#" />
         <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     </head>
     <body>
-        <!-- ##### Header Start ##### -->
-        <header>
-            <h1>
-                <a href="http://www.raphaelcordon.com/"><img src="{{ url_for('static', filename='index/main_logo.png') }}" class="mainlogo"></a>
-                <a href="http://www.raphaelcordon.com/" class="header_link">raphaelcordon.com</a>
-            </h1>
-        </header>
-        <!-- ##### Header End ##### -->
-
         <main>
-            <!-- ##### Introduction Start ##### -->
-            <h2 class="Main_message">I am Raphael Cordon,</h2>
-            <h4><img src="{{ url_for('static', filename='index/eu.png') }}"></h4>
-            <section class='introduction'>
-                <p>I am an IT professional for more than 11 years with a strong focus on Project Management.<br>
-                    My professional background is available on LinkedIn, please find the links below for my social media.</p>
-                
-                <p>This is my portfolio for Software Development projects.<br>
+            <!-- ##### Header Start ##### -->
+            <header>
+                    <a href="http://www.raphaelcordon.com/"><img src="{{ url_for('static', filename='index/main_logo.png') }}" class="mainlogo"></a>
+                    <a href="http://www.raphaelcordon.com/" class="header_link">raphaelcordon.com</a>
+                <hr/>
+            </header>
+            <!-- ##### Header End ##### -->
 
-                    Some of the projects can be found on my Github, link below.<br><br>
-                    
-                    I am a Python student, also learning related subjects to achieve my goals, such as:</p>
+            <!-- ##### Introduction Start ##### -->
+            <section class="image"><img src="{{ url_for('static', filename='index/eu.png') }}"></section>
+            <section class='introduction'>
+                <h1 class="mainMessage" id="iam">I am Raphael Cordon</h1>
+                <p>IT professional for more than 11 years with a strong focus on Project Management.</p>
+                <p>My professional background is available on LinkedIn, please find the links below for my social media.</p>
+                
+                <p>&nbsp; Check below:</p>
+                <div>
+                    <a href="#buttonPM" id="buttonPM"><i class="mainLinks fas fa-project-diagram">&nbsp; Project Management</i></a>
+                    <br>
+                    <a href="#buttonPM" id="buttonDev"><i class="mainLinks fas fa-code">&nbsp; Software Development</i></a>
+                </div>
             </section>
+
+            <article class="articles paddingBottom" id="articles"> 
+                <!-- Article PM  -->
+                {% include 'partials/articlePM.html' %}
+
+                <!-- Article DEV  -->
+                {% include 'partials/articleDev.html' %}
+            </article>    
             <!-- ##### Introduction End ##### -->
 
-            <!-- ##### Course List Start ##### -->
-            <section class="courses_list">
-                <ul>
-                    <li>
-                        HTML5 / CSS3
-                    </li>
-                    <li>
-                        MySQL / Postgre
-                    </li>
-                    <li>
-                        Python libraries such as:
-                        <ul>
-                            <li>
-                                &nbsp;&nbsp;- Flask
-                            </li>
-                            <li>
-                                &nbsp;&nbsp;- Django
-                            </li>
-                            <li>
-                                &nbsp;&nbsp;- Pandas
-                            </li>
-                            <li>
-                                &nbsp;&nbsp;- Numpy
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            <!-- ##### Course List End ##### -->
-
             <!-- ##### Social Media Start ##### -->
-            <h3 class="Main_message">My Social Media</h3>
-            <section class="social_media">
-                <table>
-                    <tr>
-                        <td><img src="{{ url_for('static', filename='index/socialmedia/github-logo-transparent-black.png') }}" class="social_media_image"></td>
-                        <td class="social_media_link"><a href="https://github.com/raphaelcordon" id="Github" target="_blank">Github</a></td>
-                    </tr>
-                    <tr>
-                        <td><img src="{{ url_for('static', filename='index/socialmedia/linkedin-logo-transparent-black.png') }}" class="social_media_image"></td>
-                        <td class="social_media_link"><a href="https://www.linkedin.com/in/raphael-cordon-04440820/" id="LinkedIn" target="_blank">LinkedIn</a></td>
-                    </tr>
-                    <tr>
-                        <td><img src="{{ url_for('static', filename='index/socialmedia/wordpress-logo-transparent-black.png') }}" class="social_media_image"></td>
-                        <td class="social_media_link"><a href="https://raphaelcordon.wordpress.com/" id="Wordpress" target="_blank">Wordpress</a></td>
-                    </tr>
-                    <tr>
-                        <td><img src="{{ url_for('static', filename='index/socialmedia/facebook-logo-transparent-black.png') }}" class="social_media_image"></td>
-                        <td class="social_media_link"><a href="https://www.facebook.com/raphael.cordon" id="Facebook" target="_blank">Facebook</a></td>
-                    </tr>
-                </table>
+            <h3 class="mainMessage">My Social Media</h3>
+            <section class="social_media paddingBottom">
+                <p class="paddingBottom"><a href="https://github.com/raphaelcordon" id="Github" target="_blank">
+                    <i class="fab fa-github">&nbsp; Github</i></a></p>
 
+                <p class="paddingBottom"><a href="https://www.linkedin.com/in/raphael-cordon-04440820/" id="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin-in">&nbsp; LinkedIn</i></a></p>
+
+                <p class="paddingBottom"><a href="https://raphaelcordon.wordpress.com/" id="Wordpress" target="_blank">
+                    <i class="fab fa-wordpress"> Wordpress</i></a></p>
+
+                <p class="paddingBottom"><a href="https://www.facebook.com/raphael.cordon" id="Facebook" target="_blank">
+                    <i class="fab fa-facebook-f">&nbsp;&nbsp; Facebook</i></a></p>
             </section>
             <!-- ##### Social Media End ##### -->
 
             <!-- ##### Apps Start ##### -->
-            <h3 class="Main_message">Apps (Flask based)</h3>
-            <section class="social_media">
-                <h5>Hosted by herokuapp</h5>
+            <h3 class="mainMessage">Apps (Flask based)</h3>
+            <section class="introduction paddingBottom">
+                <div class="paddingTop">
+                    <a href="#buttonResenhando" id="buttonResenhando"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Resenhando.co</i></a>
+                    <br>
+                    <!-- App Resenhando  -->
+                    {% include 'partials/appResenhando.html' %}
 
-                <!-- ## Resenhando ## -->
-                <table class="table_app">
-                    <tr>
-                        <td class="table_app_td">
-                            <img src="{{ url_for('static', filename='index/apps/app_resenhando.png') }}" class="apps_image"></td>
+                    <a href="#buttonMovieAPI" id="buttonMovieAPI"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Movies API</i></a>
+                    <br>
+                    <!-- App Movie API -->
+                    {% include 'partials/appMovieAPI.html' %}
 
-                    </tr>
-                    <tr>
-                        <td class="apps_title"><a href="http://www.resenhando.co/" id="app_resenhando" target="_blank">Resenhando.co (Portuguese only)</a><br>&nbsp;</td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            The app is a mini 'social-media' where the users can review a music, album or music.
-                            The data from artists and musics are brought from Spotipy, an API from Spotify, and the user only needs to pick the item to be reviewed and write the review, pretty simple.
-                            I chose to write the front-end in Portuguese in order to monitor the database with some volume of data, and since most of my friends are Brazilian, it made more sense to use Portuguese instead of English.
-
-                            <br><font color=darkred ><br>Though is still under construction, the website is usable, for now it's already possible to write a review about an artist or an album.</font>
-                            <br><p><br><font color=darkred >...and I must say, the app is beautiful! :).</font></p>
-                        </td>
-                    </tr>
-
-                    <!-- ## Music School ## -->
-                    <tr>
-                        <td class="table_app_td">
-                            <img src="{{ url_for('static', filename='index/apps/app_musicschool.png') }}" class="apps_image"></td>
-
-                    </tr>
-                    <tr>
-                        <td class="apps_title"><a href="https://raphaelcordon.herokuapp.com/music_school" id="app_musicschool" target="_blank">School of Music | Management App Simulator</a><br>&nbsp;</td>
-                        
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            The app intends to simulate basic functions for the daily-basis routine of a music school.
-                            Three layers of accesses are set where:<br>
-                            &nbsp;&nbsp;- '<b>Admin</b>':&nbsp; Has full access to create, update and remove courses, instructors and students.<br>
-                            &nbsp;&nbsp;- '<b>Instructors</b>':&nbsp; Can create classes, add and remove students from classes.<br>
-                            &nbsp;&nbsp;- '<b>Students</b>':&nbsp; Can see the classes from courses they are subscribed in.<br>
-
-                            <br><font color=darkred >This app is still under construction, but it is already possible to pass some screens and different functionalities such as create, edit and delete courses and users, though any user will have for now the same level of access in the system.</font>
-                        </td>
-                    </tr>
-
-                    <!-- ## Movie API ## -->
-                    <tr>
-                        <td class="table_app_td">
-                            <img src="{{ url_for('static', filename='index/apps/app_movieapi.png') }}" class="apps_image"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://raphaelcordonmovieapi.herokuapp.com/" id="app_movieapi" target="_blank">Movie API</a><br>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            The app connects to OMDb API in order to obtain a list of:<br>
-                            &nbsp;&nbsp;- <b>Movies</b><br>
-                            &nbsp;&nbsp;- <b>Series</b><br>
-                            &nbsp;&nbsp;- <b>Games</b><br>
-                            &nbsp;&nbsp;- <b>Live Concerts</b><br>
-                            <br>
-                            OMDb API offers two types of search:<br>
-                            &nbsp;&nbsp;- <b>Multiple results: </b>I used this one to list all the results related to the name typed.<br>
-                            &nbsp;&nbsp;- <b>Specific data: </b>Once clicked on "<i>More Details</i>" from a movie, the detailed search according to the IMDB ID will be shown.<br>
-                        </td>
-                    </tr>
-                </table>
+                    <a href="#buttonMusicSchool" id="buttonMusicSchool"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Music School Adm</i></a>
+                    <br>
+                    <!-- App Music School -->
+                    {% include 'partials/appMusicSchool.html' %}
+                </div>
             </section>
             <!-- ##### Apps End ##### -->
         </main>
@@ -172,5 +92,16 @@
             <p class="copyright">&copy; Raphael Cordon - 2020</p>
         </footer>
         <!-- ##### Footer End ##### -->
+
+
+        <!-- ##### All Javascript Files ##### -->
+        <!-- Font Awasome -->
+        <script src="https://kit.fontawesome.com/7063f4dbe2.js" crossorigin="anonymous" async></script>
+        <!-- Hide Menu Js -->
+        <script src="{{ url_for('static', filename='js/hideMenu.js') }}" async></script>
+        <!-- Hide Menu Js -->
+        <script src="{{ url_for('static', filename='js/hideApps.js') }}" async></script>
+        <!-- jQuery-2.2.4 js -->
+        <script src="{{ url_for('static', filename='js/jquery/jquery-2.2.4.min.js') }}"></script>
     </body>
 </html> 

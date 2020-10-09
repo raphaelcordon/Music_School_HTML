@@ -1,56 +1,97 @@
-/* CSS Main page */
-
+/* ------ Mobile First ------ */
 body {
     background: rgb(192, 192, 192);
-    margin-top: 0;
 }
-
-h1 {
-    display: inline;
-}
-
-.mainlogo{
-    width: 10%;
-    padding-left: 5%;
-}
-
-.header_link {
-    vertical-align: 20px;
-    padding-left: 20px;
-    font-size: 25px;
-    color: rgb(34, 34, 34);
-}
-
 main {
-    background: #ffffff;
+    width: 100%;
+    padding: 1% 5 5%;
+    margin: 0 auto 0 auto;
+    background: rgb(237, 237, 237);
     color: rgb(40, 40, 40);
     text-align: left;
-    width: 95%;
-    margin: 0 auto 0 auto;
-    padding: 1% 0 1%;
-    box-shadow: 3px 3px 5px rgba(29, 29, 29, 0.473)
 }
-
-.Main_message {
-    padding: 3%;
-    font-style: bold;
+header {
+    display: inline;
+}
+.mainMessage {
+    clear: both;
+    padding: 2%;
+    background-color: rgb(68, 68, 87);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
-
+.secondMessage {
+    text-align: center;
+    word-wrap: break-word;
+    padding: 5px 0 5px;
+    background-color: rgb(223, 223, 252);
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+a {
+    text-decoration: none;
+    color: rgb(103, 107, 145);
+    text-shadow: 0.2px 0.2px 0 black;
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(61, 0, 0);
+    text-shadow: 0.2px 0.2px 0 rgb(83, 12, 12);
+}
+a:active{
+    text-decoration: none;
+    color: rgb(73, 18, 9);
+}
+p {
+    padding-bottom: 3px;
+}
+.mainlogo {
+    width: 30%;
+}
+.mainlogo, .header_link {
+    padding-left: unset;
+    padding: 0 0 0 0;
+    margin: 0 auto 0 auto;
+}
 .introduction {
-    padding-top: 14%;
-    margin: 0 3% 0 5%;
-    font-size: 20px;
+    padding-top: unset;
+    font-size: 18px;
     line-height: 1.5;
 }
-
 h4 {
     padding: 0 4%;
     width: 300px;
-    float: left;
-
+    float: unset;
 }
-
+.articles {
+    clear: both;
+    width: 80%;
+    padding: 0 4%;
+}
+.initiallyHidden { 
+    display: none;
+}
+.paddingBottom {
+    padding-bottom: 10px;
+}
+.paddingTop {
+    padding-top: 10px;
+}
+.paddingLeft {
+    padding-left: 15px;
+}
+.mainLinks {
+    padding: 10px 15px 15px;
+}
+.dropdown_position {
+    display: block;
+}
+.image {
+    padding: 0 4%;
+    width: 300px;
+    float: left;
+}
 .courses_list {
     float: none;
     margin-left: 10%;
@@ -58,115 +99,73 @@ h4 {
     line-height: 1.2;
     font-style: italic;
 }
-
 .social_media {
-    margin-left: 10%;
-    font-size: 20px;
+    padding-top: 10px;
+    margin-left: 5%;
+    font-size: 25px;
 }
-
-.social_media_image {
-    width: 45px;
-    height: 45px;
-    text-align: center;
-}
-
-.social_media_link {
-    padding-left: 15%;
-    vertical-align: middle;
-}
-
-.table_app {
+.apps {
     width: 95%;
-}
-
-.table_app_td {
-    width: 75%;
-    padding: 2%;
-}
-
-.apps_image {
-    text-align: center;
-    box-shadow: 2px 2px 2px #555555;
-}
-
-.apps_title {
-    vertical-align: center;
-    text-align: left;
-}
-
-a {
-    text-decoration: none;
-    color: rgb(214, 182, 0);
-    text-shadow: 0.2px 0.2px 0 black;
-}
-
-a:hover {
-    text-decoration: none;
-    color: rgb(61, 0, 0);
-    text-shadow: 0.2px 0.2px 0 rgb(83, 12, 12);
-}
-
-a:active{
-    text-decoration: none;
-    color: rgb(73, 18, 9);
-}
-
-
-footer {
-    width: 95.2%;
     margin: 0 auto 0 auto;
-    margin-bottom: 5%;
+}
+.header_link {
+    vertical-align: 20px;
+    padding-left: 5%;
+    font-size: 25px;
+    color: rgb(34, 34, 34);
+}
+footer {
+    width: 100%;
+    margin: 0 auto 0 auto;
     text-align: center;
     background: black;
     color:#ffffff;
     padding: 5% 0;
-    box-shadow: 3px 3px 5px rgba(29, 29, 9, 0.473);
     font-family: 'Roboto', sans-serif;
 }
-
 .footer_logo {
-    width: 15%;
+    width: 30%;
+    padding-bottom: 10px;
+}
+.darkRed {
+    color: rgb(139, 0, 0);
+}
+dt {
+    font-weight: bold;
 }
 
-/* CSS for Smartphones */
-
-@media screen and (max-width: 480px) {
-    .mainlogo {
-        width: 30%;
-    }
-
-    .mainlogo, .header_link{
-        padding-left: unset;
-        padding: 0 0 0 0;
-        margin: 0 auto 0 auto;
-    }
-
-    .header_link {
-        padding-left: 5%;
-    }
-    
+/* ---------------------------
+|  ----- Larger Screens -----|
+---------------------------- */
+@media (min-width: 801px) {
     main {
-        width: 100%;
-        padding-bottom: 5%;
+        width: 95%;
+        box-shadow: 3px 3px 5px rgba(29, 29, 29, 0.473);
     }
-
+    .mainlogo{
+        width: 20%;
+    }
     .introduction {
-        padding-top: unset;
-        font-size: 18px;
+        padding-top: 0;
+        margin: 0 3% 0 5%;
+        font-size: 20px;
         line-height: 1.5;
     }
-
-    h4 {
-        padding: 0 4%;
-        width: 300px;
-        float: unset;
-
+    .mainMessage {
+        clear: initial;
     }
-
+    #iam {
+        background: none;
+        color: initial;
+    }
+    .header_link {
+        padding-left: 20px;
+    }
     footer {
-        width: 100%;
-        margin-bottom: 1%;
+        width: 95.2%;
+        box-shadow: 3px 3px 5px rgba(29, 29, 9, 0.473);
+    }
+    .footer_logo {
+        width: 15%;
     }
 }
-
-
