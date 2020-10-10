@@ -29,6 +29,17 @@ header {
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
+.thirdMessage {
+    word-wrap: break-word;
+    padding: 1px 15px 1px;
+    background-color: rgb(187, 187, 226);
+    color: rgb(51, 51, 51);
+    font-family: 'Roboto', sans-serif;
+}
+.appsBackground {
+    background: rgb(227, 227, 245);
+    padding: 1px 25px 1px;
+}
 a {
     text-decoration: none;
     color: rgb(103, 107, 145);
@@ -94,15 +105,15 @@ h4 {
 }
 .courses_list {
     float: none;
-    margin-left: 10%;
+    margin-left: 5%;
     font-size: 18px;
     line-height: 1.2;
     font-style: italic;
 }
 .social_media {
-    padding-top: 10px;
+    padding-top: 15px;
     margin-left: 5%;
-    font-size: 25px;
+    font-size: 20px;
 }
 .apps {
     width: 95%;
@@ -146,20 +157,29 @@ dt {
         width: 20%;
     }
     .introduction {
-        padding-top: 0;
         margin: 0 3% 0 5%;
         font-size: 20px;
         line-height: 1.5;
     }
     .mainMessage {
         clear: initial;
+        padding: 5px 10px 5px;
     }
     #iam {
+        padding-top: 5%;
         background: none;
         color: initial;
     }
     .header_link {
         padding-left: 20px;
+    }
+    .thirdMessage {
+        width: 80%;
+        padding: 1px 5px 1px;
+      }
+    .appsBackground {
+        width: 80%;
+        padding: 1px 5px 1px;
     }
     footer {
         width: 95.2%;

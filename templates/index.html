@@ -27,21 +27,21 @@
                 <h1 class="mainMessage" id="iam">I am Raphael Cordon</h1>
                 <p>IT professional for more than 11 years with a strong focus on Project Management.</p>
                 <p>My professional background is available on LinkedIn, please find the links below for my social media.</p>
-                
-                <p>&nbsp; Check below:</p>
-                <div>
-                    <a href="#buttonPM" id="buttonPM"><i class="mainLinks fas fa-project-diagram">&nbsp; Project Management</i></a>
-                    <br>
-                    <a href="#buttonPM" id="buttonDev"><i class="mainLinks fas fa-code">&nbsp; Software Development</i></a>
-                </div>
             </section>
-
-            <article class="articles paddingBottom" id="articles"> 
-                <!-- Article PM  -->
-                {% include 'partials/articlePM.html' %}
-
-                <!-- Article DEV  -->
-                {% include 'partials/articleDev.html' %}
+            <article class="articles paddingBottom" id="articles"></article>
+                <section class='introduction'>
+                    <div>
+                        <p>Check below:</p>
+                        <a href="#buttonPM" id="buttonPM"><i class="mainLinks fas fa-project-diagram">&nbsp; Project Management</i></a>
+                        <br>
+                        <!-- Article PM  -->
+                        {% include 'partials/articlePM.html' %}
+                        <a href="#buttonPM" id="buttonDev"><i class="mainLinks fas fa-code">&nbsp; Software Development</i></a>
+                        <br>
+                        <!-- Article DEV  -->
+                        {% include 'partials/articleDev.html' %}
+                    </div>
+                </section>
             </article>    
             <!-- ##### Introduction End ##### -->
 
@@ -63,23 +63,26 @@
             <!-- ##### Social Media End ##### -->
 
             <!-- ##### Apps Start ##### -->
-            <h3 class="mainMessage">Apps (Flask based)</h3>
+            <h3 class="mainMessage" id="appsArea">Apps</h3>
             <section class="introduction paddingBottom">
-                <div class="paddingTop">
-                    <a href="#buttonResenhando" id="buttonResenhando"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Resenhando.co</i></a>
-                    <br>
-                    <!-- App Resenhando  -->
-                    {% include 'partials/appResenhando.html' %}
+                <div class="paddingTop ">
+                    <h5 class="thirdMessage"><i class="fab fa-python paddingBottom">&nbsp; Python | Flask library</i></h5>
+                    <section class="appsBackground">
+                        <a href="#buttonResenhando" id="buttonResenhando"><i class="far fa-file-code paddingBottom">&nbsp; Resenhando.co</i></a>
+                        <br>
+                        <!-- App Resenhando  -->
+                        {% include 'partials/appResenhando.html' %}
 
-                    <a href="#buttonMovieAPI" id="buttonMovieAPI"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Movies API</i></a>
-                    <br>
-                    <!-- App Movie API -->
-                    {% include 'partials/appMovieAPI.html' %}
+                        <a href="#buttonMovieAPI" id="buttonMovieAPI"><i class="far fa-file-code paddingBottom">&nbsp; Movies API</i></a>
+                        <br>
+                        <!-- App Movie API -->
+                        {% include 'partials/appMovieAPI.html' %}
 
-                    <a href="#buttonMusicSchool" id="buttonMusicSchool"><i class="mainLinks far fa-file-code fa-lg">&nbsp; Music School Adm</i></a>
-                    <br>
-                    <!-- App Music School -->
-                    {% include 'partials/appMusicSchool.html' %}
+                        <a href="#buttonMusicSchool" id="buttonMusicSchool"><i class="far fa-file-code paddingBottom">&nbsp; Music School Adm</i></a>
+                        <br>
+                        <!-- App Music School -->
+                        {% include 'partials/appMusicSchool.html' %}
+                    </section>
                 </div>
             </section>
             <!-- ##### Apps End ##### -->
