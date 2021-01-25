@@ -30,18 +30,22 @@
 
                 <p class="paddingTop">I am Brazilian, living in Zürich, Switzerland since the beginning of 2020, after four years of living and working in Ireland.</p>
             </section>
-            <article class="articles paddingBottom" id="articles"></article>
+            <article class="articles paddingBottom" id="articles">
                 <section class='introduction'>
                     <div>
                         <p>Check below:</p>
-                        <a href="#buttonPM" id="buttonPM"><i class="mainLinks fas fa-project-diagram">&nbsp; Project Management</i></a>
+                        <a href="#buttonPM" id="buttonPM" onclick="toggleMenu('dataPM')"><i class="mainLinks fas fa-project-diagram">&nbsp; Project Management</i></a>
                         <br>
                         <!-- Article PM  -->
                         {% include 'partials/articlePM.html' %}
-                        <a href="#buttonPM" id="buttonDev"><i class="mainLinks fas fa-code">&nbsp; Software Development</i></a>
+                        <a href="#buttonPM" id="buttonDev" onclick="toggleMenu('dataDev')"><i class="mainLinks fas fa-code">&nbsp; Software Development</i></a>
                         <br>
                         <!-- Article DEV  -->
                         {% include 'partials/articleDev.html' %}
+                        <a href="#buttonPM" id="buttonCert" onclick="toggleMenu('dataCert')"><i class="mainLinks fas fa-graduation-cap">&nbsp; Certifications and Courses</i></a>
+                        <br>
+                        <!-- Article CERT  -->
+                        {% include 'partials/articleCert.html' %}
                     </div>
                 </section>
             </article>    
