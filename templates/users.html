@@ -6,15 +6,15 @@
             <div class="access_level">
                 <p>Register a new User:</p>
                 <br>
-                <form action="{{ url_for('users_registry') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url_for('use.usersRegistry') }}" method="post" enctype="multipart/form-data">
                     <fieldset>
 
                     <div class="alert-{{category}}">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" class="form-control">
+                        <input type="text" id="username" name="username" class="form-control" required autofocus>
 
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control">
+                        <input type="text" id="name" name="name" class="form-control" required>
 
                         <label for="access_level">Access Level</label>
                         <select id="access_level" name="access_level">
@@ -23,11 +23,6 @@
                             {% endfor %}
                             </select>
                         <button type="submit">Save</button>
-                    </div>
-                    <div>
-                        {% for category, message in get_flashed_messages(with_categories=True) %}
-                        {{ message }}
-                        {% endfor %}
                     </div>
                     </fieldset>
                 </form>
@@ -47,15 +42,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for user in users %}
-                        {% if user.access_level == 'Master' %}
+                    {% for item in users %}
+                        {% if item.access_level == 'Master' %}
                         <tr>
-                            <td>{{user.username}}</td>
-                            <td>{{user.name}}</td>
-                            <td>{{user.access_level}}</td>
+                            <td>{{item.username}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.access_level}}</td>
                             <td>
-                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
-                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            <a href="{{ url_for('use.usersEdit', id=item.id) }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('use.Delete', id=item.id) }}">Delete</a>
                             </td>
                         </tr>
                         {% endif %}
@@ -75,15 +70,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for user in users %}
-                        {% if user.access_level == 'Instructor' %}
+                    {% for item in users %}
+                        {% if item.access_level == 'Instructor' %}
                         <tr>
-                            <td>{{user.username}}</td>
-                            <td>{{user.name}}</td>
-                            <td>{{user.access_level}}</td>
+                            <td>{{item.username}}</td>
+                            <td><a href="{{ url_for('use.usersCourse', id=item.id) }}">{{item.name}}</a></td>
+                            <td>{{item.access_level}}</td>
                             <td>
-                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
-                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            <a href="{{ url_for('use.usersEdit', id=item.id) }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('use.Delete', id=item.id) }}">Delete</a>
                             </td>
                         </tr>
                         {% endif %}
@@ -103,15 +98,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for user in users %}
-                        {% if user.access_level == 'Student' %}
+                    {% for item in users %}
+                        {% if item.access_level == 'Student' %}
                         <tr>
-                            <td>{{user.username}}</td>
-                            <td><a href="{{ url_for('usercourse', id=user.id) }}">{{user.name}}</a></td>
-                            <td>{{user.access_level}}</td>
+                            <td>{{item.username}}</td>
+                            <td><a href="{{ url_for('use.usersCourse', id=item.id) }}">{{item.name}}</a></td>
+                            <td>{{item.access_level}}</td>
                             <td>
-                            <a href="{{ url_for('users_edit', id=user.id, category='users') }}">Edit</a>&nbsp; &nbsp;
-                            <a href="{{ url_for('Delete', id=user.id, category='users') }}">Delete</a>
+                            <a href="{{ url_for('use.usersEdit', id=item.id) }}">Edit</a>&nbsp; &nbsp;
+                            <a href="{{ url_for('use.Delete', id=item.id) }}">Delete</a>
                             </td>
                         </tr>
                         {% endif %}

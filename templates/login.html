@@ -4,22 +4,20 @@
     <main>
         <div class="main_top">
             <div class="mainmenu_bodytext">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <ul id="messages" class="list-unstyled">
-                        {% for message in messages %}
-                            <li class="alert alert-success">{{ message }}</li>
-                        {% endfor %}
-                         </ul>
-                    {% endif %}
-                {% endwith %}
 
                 <h1>Log in</h1>
-                <form method="POST" action="{{ url_for('authenticate') }}">
-                    <input type="hidden" name="next" value="{{ next }}">
-                    <p><label>Username:</label> <input class="form-control" type="text" name="name" required>
-                    <label>Pass:</label> <input class="form-control" type="password" name="pass" required>
-                    <button type="submit">Sign in</button></p>
+                <form action="{{ url_for('log.authenticate') }}" method="POST" enctype="multipart/form-data">
+                    <fieldset>
+                        <div>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+
+                            <label for="pass">pass</label>
+                            <input type="password" id="pass" name="pass" required>
+
+                            <button type="submit">Log in</button>
+                        </div>
+                    </fieldset>
                 </form>
                 <br>
 

@@ -1,0 +1,1 @@
+ACCESS_LEVEL = ['Master', 'Instructor', 'Student']

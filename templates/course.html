@@ -6,16 +6,13 @@
             <div class="access_level">
                 <p>Register a new Course:</p>
                 <br>
-                <form action="{{ url_for('course_registry') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url_for('cou.course_registry') }}" method="post" enctype="multipart/form-data">
                     <fieldset>
 
                     <div class="alert-{{category}}">
                         <label for="name">Course Name</label>
-                        <input type="text" id="name" name="name" class="form-control">
+                        <input type="text" id="name" name="name" class="form-control" required autofocus>
                         <button type="submit">Save</button>
-                        {% for category, message in get_flashed_messages(with_categories=True) %}
-                        {{ message }}
-                        {% endfor %}
                     </div>
                     </fieldset>
                 </form>
@@ -31,12 +28,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for c in course %}
+                    {% for item in courses %}
                         <tr>
-                            <td>{{ c.name }}</td>
+                            <td>{{ item.name }}</td>
                             <td>
-                            <a href="{{ url_for('course_edit', id=c.id, category='course') }}">Edit</a>
-                            <a href="{{ url_for('Delete', id=c.id, category='course') }}">Delete</a>
+                            <a href="{{ url_for('cou.courseEdit', id=item.id) }}">Edit</a>
+                            <a href="{{ url_for('cou.CourseDelete', id=item.id) }}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

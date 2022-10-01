@@ -3,7 +3,7 @@
         <!-- ##### Main Area Start ##### -->
         <main>
             <div class="mainmenu_bodytext">
-                <form method="post" action="{{ url_for('update_enrolled_courses') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url_for('use.update_enrolled_courses') }}" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="{{ data.id }}">
                 <table>
                     <thead>
@@ -46,7 +46,7 @@
                 </table>
                 <ul>
                     <li>
-                        <a href="{{ url_for('users') }}"><button type="submit" id="return"> Return</button></a>
+                        <a href="{{ url_for('use.users') }}"><button type="submit" id="return"> Return</button></a>
                     </li>
                     <li>
                         <button type="submit" id="save">Save</button>
